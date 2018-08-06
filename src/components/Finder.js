@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Draggable from 'react-draggable';
 import { shade } from 'polished';
 import ToolbarButton from './ToolbarButton';
+import IconFolderColored from '-!react-svg-loader!../assets/svg/folder-colored.svg';
 import IconChevronLeft from '-!react-svg-loader!../assets/svg/chevron-left.svg';
 import IconChevronRight from '-!react-svg-loader!../assets/svg/chevron-right.svg';
 import IconClose from '-!react-svg-loader!../assets/svg/close.svg';
@@ -19,6 +20,7 @@ const Wrapper = styled.div`
   color: #393939;
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  user-select: none;
 `;
 
 const Header = styled.header`
@@ -117,13 +119,15 @@ const FinderView = styled.div`
   margin-left: 100px;
 `;
 
-const FinderSidebar = styled.div`
+const Sidebar = styled.div`
   background-color: #f5f4f5;
-  padding: 10px;
+  border-right: 1px solid #dbd9d9;
+  border-bottom-left-radius: 5px;
+  padding: 10px 0;
   width: 210px;
   overflow: auto;
 `;
-const FinderMain = styled.main`
+const Main = styled.main`
   height: 480px;
   display: flex;
 `;
@@ -132,6 +136,32 @@ const SidebarLabel = styled.span`
   font-size: 11px;
   color: #5d646b;
   font-weight: 700;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 0 10px;
+`;
+
+const SidebarLink = styled.div`
+  display: flex;
+  padding: 5px 20px;
+  
+  ${props => props.active &&`
+    background: #dfdedf;
+    background: linear-gradient(to right, #dfdedf 50%, #d9d4d4 100%);
+  `}
+  
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+`;
+
+const SidebarLinkText = styled.div`
+  font-size: 14px;
+  padding-left: 7px;
+`;
+
+const Content = styled.div`
 `;
 
 class Finder extends React.Component {
@@ -163,7 +193,7 @@ class Finder extends React.Component {
           <Bottom>
             <ButtonGroup>
               <ToolbarButton _icon={<IconChevronLeft />} />
-              <ToolbarButton _icon={<IconChevronRight />} _disabled />
+              <ToolbarButton _icon={<IconChevronRight />} _disabled={true} />
             </ButtonGroup>
             <FinderView>
               <ButtonGroup group={true}>
@@ -174,11 +204,22 @@ class Finder extends React.Component {
             </FinderView>
           </Bottom>
         </Header>
-        <FinderMain>
-          <FinderSidebar>
+        <Main>
+          <Sidebar>
             <SidebarLabel>Favorites</SidebarLabel>
-          </FinderSidebar>
-        </FinderMain>
+            <SidebarLink>
+              <IconFolderColored />
+              <SidebarLinkText>Applications</SidebarLinkText>
+            </SidebarLink>
+            <SidebarLink active={true}>
+              <IconFolderColored />
+              <SidebarLinkText>Desktop</SidebarLinkText>
+            </SidebarLink>
+          </Sidebar>
+          <Content>
+            Hi
+          </Content>
+        </Main>
       </Wrapper>
     </Draggable>
     );
