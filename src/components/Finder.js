@@ -8,10 +8,12 @@ import IconChevronRight from '-!react-svg-loader!../assets/svg/chevron-right.svg
 import IconClose from '-!react-svg-loader!../assets/svg/close.svg';
 import IconMinus from '-!react-svg-loader!../assets/svg/minus.svg';
 import IconExpand from '-!react-svg-loader!../assets/svg/expand2.svg';
+import IconFolder from '-!react-svg-loader!../assets/svg/folder.svg';
+import IconGrid from '-!react-svg-loader!../assets/svg/grid.svg';
+import IconList from '-!react-svg-loader!../assets/svg/list.svg';
 
 const Wrapper = styled.div`
   width: 1015px;
-  height: 580px;
   background-color: #fff;
   color: #393939;
   border-radius: 5px;
@@ -86,11 +88,49 @@ const Title = styled.div`
 `;
 
 const ButtonGroup = styled.div`
-  display: flex;
+  display: inline-flex;
   
   > *:not(:first-child) {
     margin-left: -1px;
   }
+  
+  ${props => props.group &&`
+    > * {
+      border-radius: 0;
+      
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      
+      &:last-child {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  `}
+`;
+
+const FinderView = styled.div`
+  display: inline-flex;
+  margin-left: 100px;
+`;
+
+const FinderSidebar = styled.div`
+  background-color: #f5f4f5;
+  padding: 10px;
+  width: 210px;
+  overflow: auto;
+`;
+const FinderMain = styled.main`
+  height: 480px;
+  display: flex;
+`;
+
+const SidebarLabel = styled.span`
+  font-size: 11px;
+  color: #5d646b;
+  font-weight: 700;
 `;
 
 class Finder extends React.Component {
@@ -123,8 +163,20 @@ class Finder extends React.Component {
               <ToolbarButton _icon={<IconChevronLeft />} />
               <ToolbarButton _icon={<IconChevronRight />} _disabled />
             </ButtonGroup>
+            <FinderView>
+              <ButtonGroup group={true}>
+                <ToolbarButton _icon={<IconGrid />} active={true} />
+                <ToolbarButton _icon={<IconList />} />
+                <ToolbarButton _icon={<IconFolder />} />
+              </ButtonGroup>
+            </FinderView>
           </Bottom>
         </Header>
+        <FinderMain>
+          <FinderSidebar>
+            <SidebarLabel>Favorites</SidebarLabel>
+          </FinderSidebar>
+        </FinderMain>
       </Wrapper>
     );
   }

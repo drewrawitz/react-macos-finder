@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 const StyledButton = styled.button`
   background: #ffffff;
   background: linear-gradient(to bottom, #ffffff 0%,#ffffff 9%,#f9f7f8 10%,#eaeaea 100%);
-  font-size: 18px;
+  font-size: 14px;
   color: #757575;
   padding: 0;
   width: 27px;
@@ -25,6 +26,17 @@ const StyledButton = styled.button`
   
   ${props => props._disabled &&`
     color: #c0c0c0;
+  `}
+  
+  ${props => props.active &&`
+    background: #6b6b6b;
+    color: #fff;
+    border-color: #636363;
+    
+    &:active {
+      background: ${shade(0.65, '#6b6b6b')};
+      color: #fff;
+    }
   `}
   
   svg {
