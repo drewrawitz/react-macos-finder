@@ -21,6 +21,10 @@ injectGlobal`
     box-sizing: inherit;
   }
   
+  :focus {
+    outline: 0;
+  }
+  
   body {
     font-family: sans-serif;
     -webkit-font-smoothing: antialiased;
