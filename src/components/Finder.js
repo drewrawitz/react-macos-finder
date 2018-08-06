@@ -1,6 +1,7 @@
 /* eslint import/no-webpack-loader-syntax: off */
 import React from 'react';
 import styled from 'styled-components';
+import Draggable from 'react-draggable';
 import { shade } from 'polished';
 import ToolbarButton from './ToolbarButton';
 import IconChevronLeft from '-!react-svg-loader!../assets/svg/chevron-left.svg';
@@ -136,6 +137,7 @@ const SidebarLabel = styled.span`
 class Finder extends React.Component {
   render() {
     return (
+     <Draggable handle="Header">
       <Wrapper>
         <Header>
           <Top>
@@ -178,6 +180,7 @@ class Finder extends React.Component {
           </FinderSidebar>
         </FinderMain>
       </Wrapper>
+    </Draggable>
     );
   }
 }
