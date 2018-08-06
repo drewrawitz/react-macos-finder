@@ -10,6 +10,17 @@ export const theme = {
 
 injectGlobal`
   ${styledNormalize}
+  
+  html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+  
   body {
     font-family: sans-serif;
     -webkit-font-smoothing: antialiased;

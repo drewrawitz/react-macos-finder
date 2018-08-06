@@ -1,6 +1,10 @@
+/* eslint import/no-webpack-loader-syntax: off */
 import React from 'react'
 import styled from 'styled-components'
 import { shade } from 'polished'
+import IconClose from '-!react-svg-loader!../assets/svg/close.svg';
+import IconMinus from '-!react-svg-loader!../assets/svg/minus.svg';
+import IconExpand from '-!react-svg-loader!../assets/svg/expand2.svg';
 
 const Wrapper = styled.div`
   width: 1015px;
@@ -27,12 +31,17 @@ const Top = styled.div`
 `;
 
 const Actions = styled.div`
+  display: flex;
   position: absolute;
   top: 4px;
   left: 8px;
 
   > *:not(:last-child) {
     margin-right: 8px;
+  }
+  
+  &:hover {
+    svg { opacity: 1; }
   }
 `;
 
@@ -43,6 +52,21 @@ const Tag = styled.span`
   border-radius: 50%;
   background-color: ${props => props.theme[props.color]};
   border: 1px solid ${props => shade(0.8, props.theme[props.color])};
+  color: ${props => shade(0.45, props.theme[props.color])};
+`;
+
+const TagIcon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  
+  svg {
+    width: 80%;
+    height: 80%;
+    opacity: 0;
+    fill: currentColor;
+  }
 `;
 
 const Title = styled.span`
@@ -56,9 +80,21 @@ class Finder extends React.Component {
         <Header>
           <Top>
             <Actions>
-              <Tag color="tag-red" />
-              <Tag color="tag-orange" />
-              <Tag color="tag-green" />
+              <Tag color="tag-red">
+                <TagIcon>
+                  <IconClose />
+                </TagIcon>
+              </Tag>
+              <Tag color="tag-orange">
+                <TagIcon>
+                  <IconMinus />
+                </TagIcon>
+              </Tag>
+              <Tag color="tag-green">
+                <TagIcon>
+                  <IconExpand />
+                </TagIcon>
+              </Tag>
             </Actions>
             <Title>Applications</Title>
           </Top>
